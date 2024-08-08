@@ -1,0 +1,7 @@
+name=Magero
+author=uguu.org
+description=Bend it, walk it, grab it, throw it, drop it, break it, quick collect it
+bundleID=org.uguu.magero
+version=0.1
+buildNumber=1
+imagePath=launcher/

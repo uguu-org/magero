@@ -1,0 +1,31 @@
+digraph G {
+	node [shape=box,style=filled]
+	rankdir = RL
+	splines = ortho
+	tooltip = "Build target = fg0.png"
+	n52 [label="fg0.png",penwidth=3,tooltip="./dither.exe t_gray_fg0.png fg0.png",fillcolor=white,color="#f6ac2d"]
+	n85 [label="t_gray_fg0.png",tooltip="./svg_to_png.sh t_fg0.svg t_gray_fg0.png",fillcolor=white,color="#151975"]
+	n126 [label="t_fg0.svg",tooltip="perl add_shifts.pl t_undecorated_fg0.svg 0 | perl add_water.pl - 0 | perl add_blackhole_debris.pl - 0 > t_fg0.svg",fillcolor=white,color="#bdb2e4"]
+	n161 [label="add_blackhole_debris.pl",tooltip="add_blackhole_debris.pl\n(no actions)",fillcolor=white,color="#ca4392"]
+	n160 [label="add_water.pl",tooltip="add_water.pl\n(no actions)",fillcolor=white,color="#95c5eb"]
+	n159 [label="add_shifts.pl",tooltip="add_shifts.pl\n(no actions)",fillcolor=white,color="#8b3a94"]
+	n158 [label="t_undecorated_fg0.svg",tooltip="perl select_layers.pl '^FG (common|frame0)' t_gray_fg0.png world_master.svg | perl remove_unused_defs.pl > t_undecorated_fg0.svg",fillcolor=white,color="#72eda2"]
+	n60 [label="remove_unused_defs.pl",tooltip="remove_unused_defs.pl\n(no actions)",fillcolor=white,color="#3e3fb6"]
+	n59 [label="select_layers.pl",tooltip="select_layers.pl\n(no actions)",fillcolor=white,color="#a4c629"]
+	n58 [label="world_master.svg",tooltip="world_master.svg\n(no actions)",fillcolor=white,color="#c9599a"]
+	n74 [label="svg_to_png.sh",tooltip="svg_to_png.sh\n(no actions)",fillcolor=white,color="#f0b2a3"]
+	n45 [label="dither.exe",tooltip="gcc -march=native -O3 -Wall -Wextra -pedantic dither.c -lpng -o dither.exe",fillcolor=white,color="#4d1590"]
+	n183 [label="dither.c",tooltip="dither.c\n(no actions)",fillcolor=white,color="#f6f496"]
+	n45 -> n52 [color="#4d1590",edgetooltip="fg0.png : dither.exe"]
+	n85 -> n52 [color="#151975",edgetooltip="fg0.png : t_gray_fg0.png"]
+	n74 -> n85 [color="#f0b2a3",edgetooltip="t_gray_fg0.png : svg_to_png.sh"]
+	n126 -> n85 [color="#bdb2e4",edgetooltip="t_gray_fg0.png : t_fg0.svg"]
+	n158 -> n126 [color="#72eda2",edgetooltip="t_fg0.svg : t_undecorated_fg0.svg"]
+	n159 -> n126 [color="#8b3a94",edgetooltip="t_fg0.svg : add_shifts.pl"]
+	n160 -> n126 [color="#95c5eb",edgetooltip="t_fg0.svg : add_water.pl"]
+	n161 -> n126 [color="#ca4392",edgetooltip="t_fg0.svg : add_blackhole_debris.pl"]
+	n58 -> n158 [color="#c9599a",edgetooltip="t_undecorated_fg0.svg : world_master.svg"]
+	n59 -> n158 [color="#a4c629",edgetooltip="t_undecorated_fg0.svg : select_layers.pl"]
+	n60 -> n158 [color="#3e3fb6",edgetooltip="t_undecorated_fg0.svg : remove_unused_defs.pl"]
+	n183 -> n45 [color="#f6f496",edgetooltip="dither.exe : dither.c"]
+}

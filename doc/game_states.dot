@@ -1,0 +1,43 @@
+digraph G {
+   tooltip = "Game states"
+
+   subgraph cluster_0 {
+      label = "main.lua"
+      labeljust = l
+      playdate_update [label="playdate.update", color=green, penwidth=2]
+      main [label="Waiting for input"]
+      items [label="List items"]
+      backdoor [label="Debug backdoor"]
+      prepare_save_state [shape=box, label="Prepare save state"]
+   }
+
+   subgraph cluster_1 {
+      label = "arm.lua"
+      labeljust = l
+      update_joints [shape=box, label="Update joints"]
+      execute_action [shape=box, label="Execute action"]
+      set_action_from_poi_list [shape=box, label="Set action plan"]
+   }
+
+   subgraph cluster_2 {
+      label = "world.lua"
+      labeljust = l
+      area_trigger [shape=box, label="Update tile"]
+      throw_ball [shape=box, label="Throw ball"]
+      update_chain_reaction [shape=box, label="Update chain reaction"]
+      find_points_of_interest [shape=box, label="Find points of interest"]
+   }
+
+   playdate_update -> backdoor -> playdate_update
+   main -> items -> playdate_update
+   playdate_update -> main -> prepare_save_state
+   prepare_save_state -> update_joints [color=red]
+   prepare_save_state -> execute_action [color=red]
+
+   update_joints -> area_trigger [color=blue]
+   update_joints -> find_points_of_interest [color=blue]
+   find_points_of_interest -> set_action_from_poi_list [color=blue]
+   area_trigger -> update_chain_reaction [color=blue]
+   throw_ball -> update_chain_reaction [color=blue]
+   execute_action -> throw_ball [color=blue]
+}

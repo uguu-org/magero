@@ -1,0 +1,10 @@
+data/*.png
+data/*.exe
+data/*.o
+data/*.lua
+data/debug_*
+data/t_*
+data/test_passed.*
+release_source/
+magero.pdx/
+magero.zip

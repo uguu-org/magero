@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="2560"
+   height="1280"
+   viewBox="0 0 2560 1280.0001"
+   version="1.1"
+   id="svg1"
+   inkscape:version="1.3.2 (091e20e, 2023-11-25, custom)"
+   sodipodi:docname="ball_collision_diagram.svg"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview1"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     inkscape:document-units="px"
+     showgrid="true"
+     inkscape:zoom="0.53789062"
+     inkscape:cx="1279.0705"
+     inkscape:cy="640.46478"
+     inkscape:window-width="1920"
+     inkscape:window-height="1057"
+     inkscape:window-x="-8"
+     inkscape:window-y="-8"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="layer3">
+    <inkscape:grid
+       id="grid1"
+       units="px"
+       originx="0"
+       originy="0"
+       spacingx="160"
+       spacingy="160"
+       empcolor="#3f3fff"
+       empopacity="0.25098039"
+       color="#3d3dff"
+       opacity="0.10196078"
+       empspacing="2"
+       dotted="false"
+       gridanglex="30"
+       gridanglez="30"
+       visible="true" />
+  </sodipodi:namedview>
+  <defs
+     id="defs1" />
+  <g
+     inkscape:label="walls"
+     inkscape:groupmode="layer"
+     id="layer1">
+    <rect
+       style="fill:#000000"
+       id="rect1"
+       width="2560"
+       height="320"
+       x="0"
+       y="960" />
+    <rect
+       style="fill:#000000"
+       id="rect2"
+       width="320"
+       height="1120"
+       x="640"
+       y="0" />
+    <path
+       style="fill:#000000"
+       d="m 1440,1120 1120,-1120 v 1120 z"
+       id="path1"
+       sodipodi:nodetypes="cccc" />
+  </g>
+  <g
+     inkscape:groupmode="layer"
+     id="layer2"
+     inkscape:label="balls">
+    <circle
+       style="fill:#00ff00"
+       id="path2"
+       cx="480"
+       cy="800"
+       r="160" />
+    <circle
+       style="fill:#00ff00"
+       id="circle2"
+       cx="1533.7258300203048"
+       cy="800"
+       r="160" />
+    <circle
+       style="fill:#00ff00"
+       id="circle1"
+       cx="1966.8629150101524"
+       cy="366.8629150101524"
+       r="160" />
+  </g>
+  <g
+     inkscape:groupmode="layer"
+     id="layer3"
+     inkscape:label="test points">
+    <circle
+       style="fill:#ff0000"
+       id="path3"
+       cx="640"
+       cy="960"
+       r="10" />
+    <circle
+       style="fill:#ff0000"
+       id="circle3"
+       cx="1600"
+       cy="960"
+       r="10" />
+    <text
+       style="font-size:64px;line-height:1.25;font-family:Arial;-inkscape-font-specification:'Arial, Normal';letter-spacing:0px;word-spacing:0px;fill:#ff0000"
+       x="549.05817"
+       y="1030.0288"
+       id="text3"><tspan
+         sodipodi:role="line"
+         id="tspan3"
+         x="549.05817"
+         y="1030.0288">+R, +R</tspan></text>
+    <text
+       style="font-size:64px;line-height:1.25;font-family:Arial;-inkscape-font-specification:'Arial, Normal';letter-spacing:0px;word-spacing:0px;fill:#ff0000"
+       x="1312.2731"
+       y="1030.0288"
+       id="text4"><tspan
+         sodipodi:role="line"
+         id="tspan4"
+         x="1312.2731"
+         y="1030.0288">+R*(√2-1), +R</tspan></text>
+    <circle
+       style="fill:#ff0000"
+       id="circle4"
+       cx="2080"
+       cy="480"
+       r="10" />
+    <text
+       style="font-size:64px;line-height:1.25;font-family:Arial;-inkscape-font-specification:'Arial, Normal';letter-spacing:0px;word-spacing:0px;fill:#ff0000"
+       x="2066.4375"
+       y="548.40625"
+       id="text5"><tspan
+         sodipodi:role="line"
+         id="tspan5"
+         x="2066.4375"
+         y="548.40625">+R/√2, +R/√2</tspan></text>
+  </g>
+</svg>
