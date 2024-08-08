@@ -215,11 +215,6 @@ sub load($$$$)
          $first_input = undef;
          $all_inputs = undef;
       }
-
-      # All the other lines (i.e. the build actions) are silently ignored.
-      # Usually the graph would be already reasonably large with just the
-      # targets and dependencies, adding actions to each node will likely
-      # make it much more difficult to read.
    }
 }
 

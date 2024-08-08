@@ -1228,8 +1228,8 @@ static void WriteTileTable(FILE *outfile,
    // few months after that, we were getting pressured for memory as more
    // map tiles were being drawn, and finally added the two-tile packing
    // scheme on 2024-06-03.  This two-tile packing turned out to be an
-   // all-around good deal, reducing memory footprint without negligible
-   // impact to startup time.
+   // all-around good deal, reducing memory footprint with negligible impact
+   // to startup time.
    class TableWriter
    {
    public:
@@ -1304,10 +1304,7 @@ static void WriteTileTable(FILE *outfile,
             //
             // Spans are guaranteed to not overflow signed 16bit integers
             // because input maps are only so large, but we add a check here
-            // just in case.  Actually we could extend to signed 32bit if
-            // needed, since run-length spans always take up the full 32bit
-            // entry, but we are keeping the 16bit limit in case if we
-            // decide to use a different packing scheme in the future.
+            // just in case.
             assert(blank_count < 0x7fff);
             blank_count++;
          }

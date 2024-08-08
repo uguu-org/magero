@@ -4,7 +4,7 @@ A platform game for the Playdate console, featuring a robot with smooth crank-ba
 
 Download here: https://uguu-org.itch.io/magero
 
-*Reading the source code will expose you to spoilers!*  Please try to complete the game first before reading further.  This page is spoiler-free user documentation, spoiler-prone developer documentation can be found in [dev_readme.md](dev_readme.md).
+**Reading the source code will expose you to spoilers!**  Please try to complete the game first before reading further.  This page is spoiler-free user documentation, spoiler-prone developer documentation can be found in [dev_readme.md](dev_readme.md).
 
 ## Controls
 

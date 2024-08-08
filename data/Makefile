@@ -256,9 +256,9 @@ t_arm_table_160_160.png: t_sprites_rotated.png
 # Background and foreground layers.
 #
 # World consists of three layers, each with a 4-frame animation loop:
-# 1. IBG = immutable background (ibg{0,1,2,3}.svg).
-# 2. BG = mutable background (bg{0,1,2,3}.svg).
-# 3. FG = mutable foreground (fg{0,1,2,3}.svg).
+# 1. IBG = immutable background (t_ibg{0,1,2,3}.svg).
+# 2. BG = mutable background (t_bg{0,1,2,3}.svg).
+# 3. FG = mutable foreground (t_fg{0,1,2,3}.svg).
 #
 # Initially we have just one set of background tiles, but that resulted in
 # two limitations: all the item backgrounds must be blank, and animated
@@ -419,8 +419,9 @@ t_permanent_fg3.png: t_gray_fg3.png metadata.png remove_mutable_fg.exe
 #
 # This is bad because 254 will end up getting dithered incorrectly.
 #
-# We could have a svg_to_gray_png.sh that implements the workaround, but
-# since libpng can do the conversion on load, we don't need that extra step.
+# The bug has since been fixed, but we have not bothered to have a specialized
+# script to export grayscale images, since it's more convenient to have a
+# single svg_to_png.sh.
 t_gray_ibg0.png: t_ibg0.svg svg_to_png.sh
 	./svg_to_png.sh $< $@
 
