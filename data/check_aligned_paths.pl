@@ -351,7 +351,7 @@ sub recursive_check($$$)
    }
    else
    {
-      # Currently not not nested inside a layer group, check if we
+      # Currently not nested inside a layer group, check if we
       # have entered one at current node.
       if( $name eq "g" )
       {

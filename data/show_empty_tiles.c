@@ -11,12 +11,12 @@
    replaced with all black pixels.
 
    To check if a particular location is paintable in endgame, we check BG
-   layer for frame 0 to see if it's empty.  In practice, this is not
-   sufficient because frames 1..3 could have a different emptiness state,
-   usually due to transfer_hidden_tiles.c reacting to the underlying IBG
-   layers being different at each frame.  This tool is used to canonicalize
-   BG layer tiles as empty/not empty, so that we can easily find where those
-   tile discrepancies are.
+   layers across all frames to see if they are empty.  Checking just frame 0
+   is almost sufficient, but there are a few spots where frames 1..3 have
+   different emptiness state due to transfer_hidden_tiles.c reacting to the
+   underlying IBG layers being different at each frame.  This tool is used
+   to canonicalize BG layer tiles as empty/not empty, so that we can easily
+   find where those tile discrepancies are.
 
    We could also avoiding writing this tool and just use "magick compare",
    but that runs very slow for some reason.

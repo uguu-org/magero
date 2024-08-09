@@ -856,7 +856,7 @@ debug_rare_tiles: \
 	t_tiles_ibg0.png \
 	t_tiles_ibg1.png \
 	t_tiles_ibg2.png \
-	t_tiles_ibg3.png \
+	t_tiles_ibg3.png
 
 t_tiles_fg0.png: t_tiles_ibg3.png
 t_tiles_fg1.png: t_tiles_ibg3.png
