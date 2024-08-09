@@ -4,7 +4,7 @@ A platform game for the Playdate console, featuring a robot with smooth crank-ba
 
 Download here: https://uguu-org.itch.io/magero
 
-**Reading the source code will expose you to spoilers!**  Please try to complete the game first before reading further.  This page is spoiler-free user documentation, spoiler-prone developer documentation can be found in [dev_readme.md](dev_readme.md).
+**Reading the source code will expose you to spoilers!**  Please try to complete the game first before reading further.  This page contains spoiler-free user documentation, spoiler-prone developer documentation can be found in [dev_readme.md](dev_readme.md).
 
 ## Controls
 
@@ -33,14 +33,14 @@ Pressing A or B will show the list of items that have been collected.
 
 ## FAQ
 
-Q: There is this surface that I can't walk on?
+Q: There is this surface that I can't walk on?\
 A: Try taking a step back or a small step forward to reposition the base of the arm.  It might also be that the surface is not meant to be walked on, such as a breakable surface.
 
-Q: I can't pickup this item?
+Q: I can't pickup this item?\
 A: Try approaching the item from a different angle.
 
-Q: I threw this thing and now it's gone, or it's stuck somewhere.
+Q: I threw this thing and now it's gone, or it's stuck somewhere.\
 A: Go back to where you first found it to summon it back into place.
 
-Q: I am playing this in the simulator and the game becomes laggy after a while.
+Q: I am playing this in the simulator and the game becomes laggy after a while.\
 A: Try playing with Malloc Pool disabled, or manually clear malloc history periodically.
