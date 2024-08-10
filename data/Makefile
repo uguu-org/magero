@@ -990,7 +990,7 @@ test_passed.align_mesh_gradient: align_mesh_gradient.pl test_align_mesh_gradient
 test_passed.check_aligned_paths: check_aligned_paths.pl test_check_aligned_paths.sh
 	./test_check_aligned_paths.sh $< && touch $@
 
-test_passed.collision_aligned_to_tiles: t_metadata_collision.svg
+test_passed.collision_aligned_to_tiles: t_metadata_collision.svg check_aligned_paths.pl
 	perl check_aligned_paths.pl $< && touch $@
 
 test_passed.no_text: world_master.svg select_layers.pl element_count.pl
