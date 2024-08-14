@@ -3481,6 +3481,19 @@ function arm.update_joints(elbow, bottom_wrist, top_wrist)
 	end
 end
 
+-- Reset action_plan.  This is used to forcibly invalidate cache after
+-- resetting ball positions.
+function arm.reset_action_plan()
+	assert(debug_cache_event("reset", #action_plan_cache))
+	action_plan_cache = {}
+
+	-- Synchronize deltas and apply a no-op update to refresh action_target.
+	local crank = normalize_angle(floor(playdate.getCrankPosition()))
+	synchronize_deltas(crank)
+	apply_update(crank, false, false, false)
+	reset_tile_hints()
+end
+
 -- Execute action_plan.
 function arm.execute_action()
 	if arm.hold > 0 then
@@ -3738,54 +3751,53 @@ end
 -- local variables we are currently using.
 --
 -- The extra variables will be removed by ../data/strip_lua.pl
-local extra_local_variable_1 <const> = 172
-local extra_local_variable_2 <const> = 173
-local extra_local_variable_3 <const> = 174
-local extra_local_variable_4 <const> = 175
-local extra_local_variable_5 <const> = 176
-local extra_local_variable_6 <const> = 177
-local extra_local_variable_7 <const> = 178
-local extra_local_variable_8 <const> = 179
-local extra_local_variable_9 <const> = 180
-local extra_local_variable_10 <const> = 181
-local extra_local_variable_11 <const> = 182
-local extra_local_variable_12 <const> = 183
-local extra_local_variable_13 <const> = 184
-local extra_local_variable_14 <const> = 185
-local extra_local_variable_15 <const> = 186
-local extra_local_variable_16 <const> = 187
-local extra_local_variable_17 <const> = 188
-local extra_local_variable_18 <const> = 189
-local extra_local_variable_19 <const> = 190
-local extra_local_variable_20 <const> = 191
-local extra_local_variable_21 <const> = 192
-local extra_local_variable_22 <const> = 193
-local extra_local_variable_23 <const> = 194
-local extra_local_variable_24 <const> = 195
-local extra_local_variable_25 <const> = 196
-local extra_local_variable_26 <const> = 197
-local extra_local_variable_27 <const> = 198
-local extra_local_variable_28 <const> = 199
-local extra_local_variable_29 <const> = 200
-local extra_local_variable_30 <const> = 201
-local extra_local_variable_31 <const> = 202
-local extra_local_variable_32 <const> = 203
-local extra_local_variable_33 <const> = 204
-local extra_local_variable_34 <const> = 205
-local extra_local_variable_35 <const> = 206
-local extra_local_variable_36 <const> = 207
-local extra_local_variable_37 <const> = 208
-local extra_local_variable_38 <const> = 209
-local extra_local_variable_39 <const> = 210
-local extra_local_variable_40 <const> = 211
-local extra_local_variable_41 <const> = 212
-local extra_local_variable_42 <const> = 213
-local extra_local_variable_43 <const> = 214
-local extra_local_variable_44 <const> = 215
-local extra_local_variable_45 <const> = 216
-local extra_local_variable_46 <const> = 217
-local extra_local_variable_47 <const> = 218
-local extra_local_variable_48 <const> = 219
-local extra_local_variable_49 <const> = 220
+local extra_local_variable_1 <const> = 173
+local extra_local_variable_2 <const> = 174
+local extra_local_variable_3 <const> = 175
+local extra_local_variable_4 <const> = 176
+local extra_local_variable_5 <const> = 177
+local extra_local_variable_6 <const> = 178
+local extra_local_variable_7 <const> = 179
+local extra_local_variable_8 <const> = 180
+local extra_local_variable_9 <const> = 181
+local extra_local_variable_10 <const> = 182
+local extra_local_variable_11 <const> = 183
+local extra_local_variable_12 <const> = 184
+local extra_local_variable_13 <const> = 185
+local extra_local_variable_14 <const> = 186
+local extra_local_variable_15 <const> = 187
+local extra_local_variable_16 <const> = 188
+local extra_local_variable_17 <const> = 189
+local extra_local_variable_18 <const> = 190
+local extra_local_variable_19 <const> = 191
+local extra_local_variable_20 <const> = 192
+local extra_local_variable_21 <const> = 193
+local extra_local_variable_22 <const> = 194
+local extra_local_variable_23 <const> = 195
+local extra_local_variable_24 <const> = 196
+local extra_local_variable_25 <const> = 197
+local extra_local_variable_26 <const> = 198
+local extra_local_variable_27 <const> = 199
+local extra_local_variable_28 <const> = 200
+local extra_local_variable_29 <const> = 201
+local extra_local_variable_30 <const> = 202
+local extra_local_variable_31 <const> = 203
+local extra_local_variable_32 <const> = 204
+local extra_local_variable_33 <const> = 205
+local extra_local_variable_34 <const> = 206
+local extra_local_variable_35 <const> = 207
+local extra_local_variable_36 <const> = 208
+local extra_local_variable_37 <const> = 209
+local extra_local_variable_38 <const> = 210
+local extra_local_variable_39 <const> = 211
+local extra_local_variable_40 <const> = 212
+local extra_local_variable_41 <const> = 213
+local extra_local_variable_42 <const> = 214
+local extra_local_variable_43 <const> = 215
+local extra_local_variable_44 <const> = 216
+local extra_local_variable_45 <const> = 217
+local extra_local_variable_46 <const> = 218
+local extra_local_variable_47 <const> = 219
+local extra_local_variable_48 <const> = 220
 
 --}}}

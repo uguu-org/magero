@@ -22,8 +22,10 @@ Pressing A or B will show the list of items that have been collected.
 
 ## Options menu
 
-   * reset: reset all progress and restart from scratch.  Progress is automatically saved on exit, so you will always resume at where you left off last time unless you do a reset.
-      * hints: set verbosity level for help/spoiler display.
+   * reset: reset game states.  Select a nonempty option, then exit the menu to perform the reset.
+       * game: reset all progress and restart from scratch.  Progress is automatically saved on exit, so you will always resume at where you left off last time unless you do a reset.
+       * balls: reset position of all throwable objects.  This is useful if the balls are stuck and somehow can't be individually summon back into place (see FAQ entry).  This only works if game is in idle state, and the arm is not holding anything.
+   * hints: set verbosity level for help/spoiler display.
       * none: don't show any hints.
       * basic: show basic controls after a few seconds of idleness.
       * more: show a triangle pointing at the nearest off-screen item.

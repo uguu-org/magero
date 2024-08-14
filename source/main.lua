@@ -156,8 +156,15 @@ local hide_help
 -- below the custom menu options (with "volume" selected), so we want to
 -- add the "reset" command first and "flex" option last to make the
 -- "flex" option more accessible.
-playdate.getSystemMenu():addMenuItem("reset", function()
-	world.reset_requested = true
+local reset_mode = playdate.getSystemMenu():addOptionsMenuItem(
+	"reset", {"", "game", "balls"}, "", function(new_mode)
+	if new_mode == "game" then
+		world.reset_requested = true
+		assert(debug_log("Reset game requested"))
+	elseif new_mode == "balls" then
+		world.reset_balls_requested = true
+		assert(debug_log("Reset balls requested"))
+	end
 end)
 
 local hint_mode = playdate.getSystemMenu():addOptionsMenuItem(
@@ -1134,6 +1141,7 @@ function playdate.update()
 
 	elseif world.reset_requested then
 		assert(debug_log("Reset"))
+		reset_mode:setValue("")
 
 		-- Reset requested.  We will start by showing the loading screen,
 		-- since reloading the tiles takes a few seconds.
@@ -1272,6 +1280,30 @@ function playdate.update()
 
 		playdate.timer.updateTimers()
 		return
+	end
+
+	-- Reset balls, for use when the ball is really stuck, and somehow fails
+	-- to be summoned back into place.
+	--
+	-- Because this is only checked in the main loop, it means if there is
+	-- some action that is currently in progress (e.g. the ball is currently
+	-- bouncing somewhere), the command will be buffered.
+	if world.reset_balls_requested then
+		-- Always reset the menu option back to blank.
+		world.reset_balls_requested = nil
+		reset_mode:setValue("")
+
+		-- Only perform the reset if we are currently not holding a ball.
+		if arm.hold == 0 then
+			for i = 1, #world.INIT_BALLS do
+				local entry <const> = world.INIT_BALLS[i]
+				local x <const> = entry[1]
+				local y <const> = entry[2]
+				assert(debug_log(string.format("Ball %d moved from (%d,%d) to (%d,%d)", i, world.balls[i][1], world.balls[i][2], x, y)))
+				world.balls[i] = {x, y}
+			end
+			arm.reset_action_plan()
+		end
 	end
 
 	-- Toggle collected items display on A/B press.
@@ -1469,151 +1501,150 @@ end
 -- local variables we are currently using.
 --
 -- The extra variables will be removed by ../data/strip_lua.pl
-local extra_local_variable_1 <const> = 75
-local extra_local_variable_2 <const> = 76
-local extra_local_variable_3 <const> = 77
-local extra_local_variable_4 <const> = 78
-local extra_local_variable_5 <const> = 79
-local extra_local_variable_6 <const> = 80
-local extra_local_variable_7 <const> = 81
-local extra_local_variable_8 <const> = 82
-local extra_local_variable_9 <const> = 83
-local extra_local_variable_10 <const> = 84
-local extra_local_variable_11 <const> = 85
-local extra_local_variable_12 <const> = 86
-local extra_local_variable_13 <const> = 87
-local extra_local_variable_14 <const> = 88
-local extra_local_variable_15 <const> = 89
-local extra_local_variable_16 <const> = 90
-local extra_local_variable_17 <const> = 91
-local extra_local_variable_18 <const> = 92
-local extra_local_variable_19 <const> = 93
-local extra_local_variable_20 <const> = 94
-local extra_local_variable_21 <const> = 95
-local extra_local_variable_22 <const> = 96
-local extra_local_variable_23 <const> = 97
-local extra_local_variable_24 <const> = 98
-local extra_local_variable_25 <const> = 99
-local extra_local_variable_26 <const> = 100
-local extra_local_variable_27 <const> = 101
-local extra_local_variable_28 <const> = 102
-local extra_local_variable_29 <const> = 103
-local extra_local_variable_30 <const> = 104
-local extra_local_variable_31 <const> = 105
-local extra_local_variable_32 <const> = 106
-local extra_local_variable_33 <const> = 107
-local extra_local_variable_34 <const> = 108
-local extra_local_variable_35 <const> = 109
-local extra_local_variable_36 <const> = 110
-local extra_local_variable_37 <const> = 111
-local extra_local_variable_38 <const> = 112
-local extra_local_variable_39 <const> = 113
-local extra_local_variable_40 <const> = 114
-local extra_local_variable_41 <const> = 115
-local extra_local_variable_42 <const> = 116
-local extra_local_variable_43 <const> = 117
-local extra_local_variable_44 <const> = 118
-local extra_local_variable_45 <const> = 119
-local extra_local_variable_46 <const> = 120
-local extra_local_variable_47 <const> = 121
-local extra_local_variable_48 <const> = 122
-local extra_local_variable_49 <const> = 123
-local extra_local_variable_50 <const> = 124
-local extra_local_variable_51 <const> = 125
-local extra_local_variable_52 <const> = 126
-local extra_local_variable_53 <const> = 127
-local extra_local_variable_54 <const> = 128
-local extra_local_variable_55 <const> = 129
-local extra_local_variable_56 <const> = 130
-local extra_local_variable_57 <const> = 131
-local extra_local_variable_58 <const> = 132
-local extra_local_variable_59 <const> = 133
-local extra_local_variable_60 <const> = 134
-local extra_local_variable_61 <const> = 135
-local extra_local_variable_62 <const> = 136
-local extra_local_variable_63 <const> = 137
-local extra_local_variable_64 <const> = 138
-local extra_local_variable_65 <const> = 139
-local extra_local_variable_66 <const> = 140
-local extra_local_variable_67 <const> = 141
-local extra_local_variable_68 <const> = 142
-local extra_local_variable_69 <const> = 143
-local extra_local_variable_70 <const> = 144
-local extra_local_variable_71 <const> = 145
-local extra_local_variable_72 <const> = 146
-local extra_local_variable_73 <const> = 147
-local extra_local_variable_74 <const> = 148
-local extra_local_variable_75 <const> = 149
-local extra_local_variable_76 <const> = 150
-local extra_local_variable_77 <const> = 151
-local extra_local_variable_78 <const> = 152
-local extra_local_variable_79 <const> = 153
-local extra_local_variable_80 <const> = 154
-local extra_local_variable_81 <const> = 155
-local extra_local_variable_82 <const> = 156
-local extra_local_variable_83 <const> = 157
-local extra_local_variable_84 <const> = 158
-local extra_local_variable_85 <const> = 159
-local extra_local_variable_86 <const> = 160
-local extra_local_variable_87 <const> = 161
-local extra_local_variable_88 <const> = 162
-local extra_local_variable_89 <const> = 163
-local extra_local_variable_90 <const> = 164
-local extra_local_variable_91 <const> = 165
-local extra_local_variable_92 <const> = 166
-local extra_local_variable_93 <const> = 167
-local extra_local_variable_94 <const> = 168
-local extra_local_variable_95 <const> = 169
-local extra_local_variable_96 <const> = 170
-local extra_local_variable_97 <const> = 171
-local extra_local_variable_98 <const> = 172
-local extra_local_variable_99 <const> = 173
-local extra_local_variable_100 <const> = 174
-local extra_local_variable_101 <const> = 175
-local extra_local_variable_102 <const> = 176
-local extra_local_variable_103 <const> = 177
-local extra_local_variable_104 <const> = 178
-local extra_local_variable_105 <const> = 179
-local extra_local_variable_106 <const> = 180
-local extra_local_variable_107 <const> = 181
-local extra_local_variable_108 <const> = 182
-local extra_local_variable_109 <const> = 183
-local extra_local_variable_110 <const> = 184
-local extra_local_variable_111 <const> = 185
-local extra_local_variable_112 <const> = 186
-local extra_local_variable_113 <const> = 187
-local extra_local_variable_114 <const> = 188
-local extra_local_variable_115 <const> = 189
-local extra_local_variable_116 <const> = 190
-local extra_local_variable_117 <const> = 191
-local extra_local_variable_118 <const> = 192
-local extra_local_variable_119 <const> = 193
-local extra_local_variable_120 <const> = 194
-local extra_local_variable_121 <const> = 195
-local extra_local_variable_122 <const> = 196
-local extra_local_variable_123 <const> = 197
-local extra_local_variable_124 <const> = 198
-local extra_local_variable_125 <const> = 199
-local extra_local_variable_126 <const> = 200
-local extra_local_variable_127 <const> = 201
-local extra_local_variable_128 <const> = 202
-local extra_local_variable_129 <const> = 203
-local extra_local_variable_130 <const> = 204
-local extra_local_variable_131 <const> = 205
-local extra_local_variable_132 <const> = 206
-local extra_local_variable_133 <const> = 207
-local extra_local_variable_134 <const> = 208
-local extra_local_variable_135 <const> = 209
-local extra_local_variable_136 <const> = 210
-local extra_local_variable_137 <const> = 211
-local extra_local_variable_138 <const> = 212
-local extra_local_variable_139 <const> = 213
-local extra_local_variable_140 <const> = 214
-local extra_local_variable_141 <const> = 215
-local extra_local_variable_142 <const> = 216
-local extra_local_variable_143 <const> = 217
-local extra_local_variable_144 <const> = 218
-local extra_local_variable_145 <const> = 219
-local extra_local_variable_146 <const> = 220
+local extra_local_variable_1 <const> = 76
+local extra_local_variable_2 <const> = 77
+local extra_local_variable_3 <const> = 78
+local extra_local_variable_4 <const> = 79
+local extra_local_variable_5 <const> = 80
+local extra_local_variable_6 <const> = 81
+local extra_local_variable_7 <const> = 82
+local extra_local_variable_8 <const> = 83
+local extra_local_variable_9 <const> = 84
+local extra_local_variable_10 <const> = 85
+local extra_local_variable_11 <const> = 86
+local extra_local_variable_12 <const> = 87
+local extra_local_variable_13 <const> = 88
+local extra_local_variable_14 <const> = 89
+local extra_local_variable_15 <const> = 90
+local extra_local_variable_16 <const> = 91
+local extra_local_variable_17 <const> = 92
+local extra_local_variable_18 <const> = 93
+local extra_local_variable_19 <const> = 94
+local extra_local_variable_20 <const> = 95
+local extra_local_variable_21 <const> = 96
+local extra_local_variable_22 <const> = 97
+local extra_local_variable_23 <const> = 98
+local extra_local_variable_24 <const> = 99
+local extra_local_variable_25 <const> = 100
+local extra_local_variable_26 <const> = 101
+local extra_local_variable_27 <const> = 102
+local extra_local_variable_28 <const> = 103
+local extra_local_variable_29 <const> = 104
+local extra_local_variable_30 <const> = 105
+local extra_local_variable_31 <const> = 106
+local extra_local_variable_32 <const> = 107
+local extra_local_variable_33 <const> = 108
+local extra_local_variable_34 <const> = 109
+local extra_local_variable_35 <const> = 110
+local extra_local_variable_36 <const> = 111
+local extra_local_variable_37 <const> = 112
+local extra_local_variable_38 <const> = 113
+local extra_local_variable_39 <const> = 114
+local extra_local_variable_40 <const> = 115
+local extra_local_variable_41 <const> = 116
+local extra_local_variable_42 <const> = 117
+local extra_local_variable_43 <const> = 118
+local extra_local_variable_44 <const> = 119
+local extra_local_variable_45 <const> = 120
+local extra_local_variable_46 <const> = 121
+local extra_local_variable_47 <const> = 122
+local extra_local_variable_48 <const> = 123
+local extra_local_variable_49 <const> = 124
+local extra_local_variable_50 <const> = 125
+local extra_local_variable_51 <const> = 126
+local extra_local_variable_52 <const> = 127
+local extra_local_variable_53 <const> = 128
+local extra_local_variable_54 <const> = 129
+local extra_local_variable_55 <const> = 130
+local extra_local_variable_56 <const> = 131
+local extra_local_variable_57 <const> = 132
+local extra_local_variable_58 <const> = 133
+local extra_local_variable_59 <const> = 134
+local extra_local_variable_60 <const> = 135
+local extra_local_variable_61 <const> = 136
+local extra_local_variable_62 <const> = 137
+local extra_local_variable_63 <const> = 138
+local extra_local_variable_64 <const> = 139
+local extra_local_variable_65 <const> = 140
+local extra_local_variable_66 <const> = 141
+local extra_local_variable_67 <const> = 142
+local extra_local_variable_68 <const> = 143
+local extra_local_variable_69 <const> = 144
+local extra_local_variable_70 <const> = 145
+local extra_local_variable_71 <const> = 146
+local extra_local_variable_72 <const> = 147
+local extra_local_variable_73 <const> = 148
+local extra_local_variable_74 <const> = 149
+local extra_local_variable_75 <const> = 150
+local extra_local_variable_76 <const> = 151
+local extra_local_variable_77 <const> = 152
+local extra_local_variable_78 <const> = 153
+local extra_local_variable_79 <const> = 154
+local extra_local_variable_80 <const> = 155
+local extra_local_variable_81 <const> = 156
+local extra_local_variable_82 <const> = 157
+local extra_local_variable_83 <const> = 158
+local extra_local_variable_84 <const> = 159
+local extra_local_variable_85 <const> = 160
+local extra_local_variable_86 <const> = 161
+local extra_local_variable_87 <const> = 162
+local extra_local_variable_88 <const> = 163
+local extra_local_variable_89 <const> = 164
+local extra_local_variable_90 <const> = 165
+local extra_local_variable_91 <const> = 166
+local extra_local_variable_92 <const> = 167
+local extra_local_variable_93 <const> = 168
+local extra_local_variable_94 <const> = 169
+local extra_local_variable_95 <const> = 170
+local extra_local_variable_96 <const> = 171
+local extra_local_variable_97 <const> = 172
+local extra_local_variable_98 <const> = 173
+local extra_local_variable_99 <const> = 174
+local extra_local_variable_100 <const> = 175
+local extra_local_variable_101 <const> = 176
+local extra_local_variable_102 <const> = 177
+local extra_local_variable_103 <const> = 178
+local extra_local_variable_104 <const> = 179
+local extra_local_variable_105 <const> = 180
+local extra_local_variable_106 <const> = 181
+local extra_local_variable_107 <const> = 182
+local extra_local_variable_108 <const> = 183
+local extra_local_variable_109 <const> = 184
+local extra_local_variable_110 <const> = 185
+local extra_local_variable_111 <const> = 186
+local extra_local_variable_112 <const> = 187
+local extra_local_variable_113 <const> = 188
+local extra_local_variable_114 <const> = 189
+local extra_local_variable_115 <const> = 190
+local extra_local_variable_116 <const> = 191
+local extra_local_variable_117 <const> = 192
+local extra_local_variable_118 <const> = 193
+local extra_local_variable_119 <const> = 194
+local extra_local_variable_120 <const> = 195
+local extra_local_variable_121 <const> = 196
+local extra_local_variable_122 <const> = 197
+local extra_local_variable_123 <const> = 198
+local extra_local_variable_124 <const> = 199
+local extra_local_variable_125 <const> = 200
+local extra_local_variable_126 <const> = 201
+local extra_local_variable_127 <const> = 202
+local extra_local_variable_128 <const> = 203
+local extra_local_variable_129 <const> = 204
+local extra_local_variable_130 <const> = 205
+local extra_local_variable_131 <const> = 206
+local extra_local_variable_132 <const> = 207
+local extra_local_variable_133 <const> = 208
+local extra_local_variable_134 <const> = 209
+local extra_local_variable_135 <const> = 210
+local extra_local_variable_136 <const> = 211
+local extra_local_variable_137 <const> = 212
+local extra_local_variable_138 <const> = 213
+local extra_local_variable_139 <const> = 214
+local extra_local_variable_140 <const> = 215
+local extra_local_variable_141 <const> = 216
+local extra_local_variable_142 <const> = 217
+local extra_local_variable_143 <const> = 218
+local extra_local_variable_144 <const> = 219
+local extra_local_variable_145 <const> = 220
 
 --}}}
