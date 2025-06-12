@@ -559,14 +559,34 @@ local function load_and_rotate(image_table, start_offset, output_table)
 end
 
 -- Generate mirror images of finger sprites.
+--
+-- Basically we want to flip the top finger sprites vertically to make the
+-- bottom finger sprites, and also rotate them at opposite directions.  But
+-- this is a bit more tricky than needed because the quadrant boundaries
+-- are off by 1.  See also bottom_finger_offset.
+--
+--   bottom finger   top finger
+--   angle  index    angle  index
+--   0      1        0      1
+--   1      2        359    360
+--   2      3        358    359
+--   ...    ...      ...    ...
+--   88     89       272    273
+--   89     90       271    272
+--   90     91       270    271
+--   91     92       269    270
+--   ...    ...      ...    ...
+--   269    270      91     92
+--   270    271      90     91
+--   271    272      89     90
+--   272    273      88     89
+--   ...    ...      ...    ...
+--   357    358      3      4
+--   358    359      2      3
+--   359    360      1      2
 local function initialize_bottom_finger()
-	for i = 1, 90 do
-		g_finger_bottom:setImage(360 - i + 1, util.vertically_flipped_image(g_finger_top[i]))
-	end
-	for a = 1, 3 do
-		for i = 1, 90 do
-			g_finger_bottom:setImage((a - 1) * 90 + i, util.rotated_image(g_finger_bottom[270 + i], a * 90))
-		end
+	for i = 1, 360 do
+		g_finger_bottom:setImage(i, util.vertically_flipped_image(g_finger_top[(360 - (i - 1)) % 360 + 1]))
 	end
 end
 
@@ -642,6 +662,12 @@ end
 
 -- Adjust coordinate with G_BOTTOM_FINGER_OFFSET.
 local function bottom_finger_offset(a, x, y)
+	if (a % 90) == 0 then
+		-- For bottom fingers, the quadrant offsets are off by one.
+		-- See initialize_bottom_finger.
+		local i <const> = ((a // 90) + 3) % 4 + 1
+		return x + G_BOTTOM_FINGER_OFFSET[i][1], y + G_BOTTOM_FINGER_OFFSET[i][2]
+	end
 	return x + G_BOTTOM_FINGER_OFFSET[(a // 90) + 1][1], y + G_BOTTOM_FINGER_OFFSET[(a // 90) + 1][2]
 end
 

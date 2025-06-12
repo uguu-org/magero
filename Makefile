@@ -41,7 +41,7 @@ release: $(package_name).zip
 $(package_name).zip:
 	-rm -rf $(package_name).pdx $(release_source_dir) $@
 	cp -R $(source_dir) $(release_source_dir)
-	for i in $(source_dir)/*.lua; do perl $(data_dir)/strip_lua.pl $$i > $(release_source_dir)/`basename $$i`; done
+	for i in $(source_dir)/*.lua; do perl $(data_dir)/strip_lua.pl $$i | perl $(data_dir)/inline_constants.pl > $(release_source_dir)/`basename $$i`; done
 	pdc -s $(release_source_dir) $(package_name).pdx
 	zip -9 -r $@ $(package_name).pdx
 
