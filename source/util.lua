@@ -320,8 +320,8 @@ assert(not util.validate_state({x = "int", y = "int"}, {}))
 -- to false, start the game, and wait 10 seconds.  The spinning arrows in
 -- help tooltips should be aligned.
 --
--- This workaround is still needed as of SDK 2.2.0
-local USE_ROTATION_WORKAROUND <const> = true
+-- This appears to be fixed in SDK 2.7.5, so the constant below is set to false.
+local USE_ROTATION_WORKAROUND <const> = false
 
 function util.rotated_image(image, angle)
 	if angle == 0 then
@@ -353,8 +353,8 @@ end
 --    every quarter turn (as opposed to remaining aligned for a full turn),
 --    we will still need this workaround.
 --
--- This workaround is still needed as of SDK 2.2.0
-local USE_FLIP_WORKAROUND <const> = true
+-- This appears to be fixed in SDK 2.7.5, so the constant below is set to false.
+local USE_FLIP_WORKAROUND <const> = false
 
 function util.vertically_flipped_image(image)
 	if USE_FLIP_WORKAROUND then
